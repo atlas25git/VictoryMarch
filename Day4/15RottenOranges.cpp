@@ -19,7 +19,7 @@ class Solution
     }
     
     
-    //Function to find minimum time required to rot all oranges. 
+    //Function to find minimum time required to rot all oranges 
     int orangesRotting(vector<vector<int>>& grid) {
         //as given in the question, rotten oranges can 
         //rot the oranges adjacent to them in a nit time
