@@ -38,6 +38,12 @@ class Solution
         int maxrange = arr[0]; 
         int steps = arr[0];   
         int jumps = 1;    
+
+        //or approach here is simple, we check for the max possible
+        //location that could be reached by a jump from the current index
+        //and the steps it provides, however this is a greedy approach and
+        //and we circumvent it by re intializing steps as the max range-i
+        //as it is the expression we used.
         
         for(int i = 1; i<n; ++i)
         {
