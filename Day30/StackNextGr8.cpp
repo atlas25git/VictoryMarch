@@ -20,9 +20,9 @@ void solve(){
         for(i=0;i<n;i++)cin>>ar[i];
 
         s.push(ar[n-1]);
-        s1.push(-1);
+        //s1.push(-1);
         //cout<<-1<<" ";
-        for(i=n-2;i>=0;i--)
+        for(i=n-1;i>=0;i--)
         {
             while(!s.empty() && ar[i]>=s.top())
             {   
