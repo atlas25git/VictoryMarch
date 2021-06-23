@@ -21,7 +21,7 @@ class Solution
             if(i < n && j > 0 && brr[j-1] >= arr[i]){
                 min_i = i+1;
             }
-            
+            //--and thus it is done
             //if i = 0, it means that elements from arr[] in the first half is 
     		//an empty set and if j = m, it means that elements from brr[] in 
     		//second half is an empty set. so it is necessary to check that
