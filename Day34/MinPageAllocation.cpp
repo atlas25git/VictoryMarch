@@ -80,9 +80,11 @@ class Solution
             else {
                 start = mid + 1;
             }
+        //scope ends
         }
         //returning minimum number of pages.
         return ans;
+
     }
 };
 
