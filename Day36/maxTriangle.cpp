@@ -22,7 +22,7 @@ class Solution
                 count+=k-j-1;
             }
         }
-        return count;
+        return count;//
     }
 };
 
