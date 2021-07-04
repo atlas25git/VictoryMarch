@@ -110,37 +110,81 @@ struct TreeNode
     TreeNode *right;
 };
 */
+void convert1(Node *head, TreeNode *&root) 
+{
+    //queue to store the parent nodes.
+    queue<TreeNode *> q;
+    
+    //base case.
+    if (head == NULL) 
+    {
+        root = NULL;
+        return;
+    }
+    
+    //the first node is always the root node so we add it to the queue.
+    root = new TreeNode(head->data);
+    q.push(root);
+    
+    head = head->next;
+    
+    //using a loop until we reach end of the linked list.
+    while (head) 
+    {
+        //storing the front node from queue and removing it from queue.
+        TreeNode *k = q.front();
+        q.pop();
+        
+        //taking next two nodes from the linked list and adding them as 
+        //children of the current parent node. Pushing them into the queue
+        //so that they will be parents to the future nodes.
+        TreeNode *leftT = NULL;
+        TreeNode *rightT = NULL;
+        leftT = new TreeNode(head->data);
+
+        q.push(leftT);
+        head = head->next;
+        if (head) 
+        {
+            rightT = new TreeNode(head->data);
+            q.push(rightT);
+            head = head->next;
+        }
+        
+        //assigning left and right children of parent node.
+        k->left = leftT;
+        k->right = rightT;
+    }
+}
 
 //Function to make binary tree from linked list.
 void convert(Node *head, TreeNode *&root) {
     
-    queue<TreeNode* >q;
-    if(!head)
-    {
-        root=NULL;
-        return;
-    }
+    if(!head){root=NULL;return;}
+    queue<TreeNode*> q;
     root = new TreeNode(head->data);
     q.push(root);
-    head = head->next;
+    head=head->next;
+    //basically the queue here is helping us maintain the distance
+    //pf 2*i,2*i+1 meanwhile also having at hand the nodes in between
     while(head)
     {
-        TreeNode* k = q.front();
+        TreeNode* t = q.front();
         q.pop();
-        TreeNode* leftT=NULL,*rightT=NULL;
-        
-        leftT = new TreeNode(head->data);
-        q.push(leftT);
-        head = head->next;
+        TreeNode* l=NULL,*r=NULL;
+        l= new TreeNode(head->data);
+        q.push(l);
+        head=head->next;
+        //head=next(head,1);
         if(head)
         {
-            rightT = new TreeNode(head->data);
-            q.push(rightT);
+            r=new TreeNode(head->data);
+            q.push(r);
             head=head->next;
+            //head=next(head,1);
         }
-        k->left = leftT;
-        k->right = rightT;
+        
+        t->left=l;
+        t->right=r;
     }
-    
-    
 }
