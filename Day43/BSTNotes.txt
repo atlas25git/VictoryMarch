@@ -1,0 +1,45 @@
+Self Balancing BSTs
+-------------------
+1. To keep the height in check.
+2. Depending on the inserting efficacy our tree could either be skewed or logN.
+3. This could be circumvented if already know about the data.
+4. Thus to ensure the height be logN we propose Self Balancing BSTs.
+5. This happens by employing right and left balancing.
+6. Rotations employ us to change the root without averting the left and right property of BSTs.
+7. Two major ones are AVL and Red Black tree.
+8. RB is loose hence saves constant restructuring, whereas avl's astuteness leads to it being expensive.
+
+#AVL has faster search therefore it is considered if we've a search based job, but in the case if insertion is involved
+on a colliqual scale, we choosr RB/
+
+AVL Tree:
+---------
+1. Balance Factor = 1, for every node diff b/w left and right subTree heights doesn't exceed one.
+2. Insert:
+    1. Perform normal BST insert.
+    2. Traverse all the ancestor of the newly inserted node, till the root.
+    3. For any unbalanced ancestor that has been found, following contingencies are to be handled:
+        1. Single Rotation
+            1. Left Left
+            2. Right Right
+
+        2. Double Rotations
+            1. Left Right
+            2. Right Left
+        These directions are discerned on the basis of structure that has been formed using the node and its unbalanced
+        ancestor, since blance factor =1, therefore such cases would only be an ancestor its child and the grandChild.
+        #Here in insertion we find out one unbalanced ancestor fix it and we are done.
+
+Deletion
+--------
+1. Same as insertion but the search for unbalanced ancestor doesn't stop at one.
+
+Red-Black Tree
+--------------
+1. Because of its loose constraint nature, it saves us frequent Rotations.
+2. Root is always black.
+3. No two consecutive Reds, but blacks could be adjacent.
+4. No. of black nodes from every node to all of its descendant leaves should be same.
+    It means that the path from a node to its leave, will have equal no of black nodes, for the leaves at 
+    a same level.
+5. Sets and maps root their strength from this.
