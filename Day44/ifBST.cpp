@@ -17,7 +17,34 @@ struct Node {
 
 
 
-struct Node* deleteNode(struct Node* root, int key);
+
+ // } Driver Code Ends
+
+
+class Solution
+{
+    public:
+    int ibu(Node* node,int min,int max)
+    {
+        if(!node)return 1;
+        if(node->data<min || node->data>max)
+            return 0;
+        return
+            ibu(node->left,min,node->data-1) 
+            &&
+            ibu(node->right,node->data+1,max);
+    }
+    //Function to check whether a Binary Tree is BST or not.
+    bool isBST(Node* root) 
+    {
+        return(ibu(root,INT_MIN,INT_MAX));
+    }
+};
+
+
+
+
+// { Driver Code Starts.
 
 // Function to Build Tree
 Node* buildTree(string str)
@@ -94,7 +121,7 @@ void inorder(Node *root, vector<int> &v)
 }
 
 int main() {
-   
+ 
    int t;
    string tc;
    getline(cin, tc);
@@ -103,54 +130,17 @@ int main() {
    {
     string s; 
     getline(cin, s);
-    Node* root1 = buildTree(s);
-    getline(cin, s);
-    int k = stoi(s);
-    root1  = deleteNode(root1, k);
-    vector<int> v;
-    inorder(root1, v);
-    for(auto i:v)
-        cout << i << " ";
-    cout << endl;
+    Node* root = buildTree(s);
+    Solution ob;
+    if(ob.isBST(root)) 
+        cout<<"1\n";
+        
+    else
+        cout<<"0\n";
    }
    return 0;
-}// } Driver Code Ends
+}
 
 
-
-
-
-//Function to delete a node from BST.
-Node *deleteNode(Node *root,  int X)
-{
-    if(!root)return root;
-    else if(root->data > X)root->left= deleteNode(root->left,X);
-    else if(root->data < X)root->right= deleteNode(root->right,X);
-    else if(root->data == X)
-    {   //the case of leaf node will also be handled under the firt
-        //block
-        if(!root->left)
-        {
-            Node* temp = root->right;
-            delete root;
-            return temp;
-            
-        }
-        else if(!root->right)
-        {
-            Node* temp = root->left;
-            delete root;
-            return temp;
-        }
-        else if(root->left && root->right)
-        {
-            Node* temp = root->right;
-            while(temp && temp->left)temp = temp->left;
-            //cout<<root->data<<"tmpCHeck"<<endl;
-            root->data = temp->data;
-            root->right = deleteNode(root->right,temp->data);
-            
-        }
-        return root;
-    }
-};
+//Position this line where user code will be pasted
+  // } Driver Code Ends
