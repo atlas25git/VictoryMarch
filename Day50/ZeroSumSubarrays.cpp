@@ -23,7 +23,14 @@ class Solution{
             if(mp.count(sum)>0)
             //means in b/w elements became zero
             //.count method return 1 indicating presence
-                c+=mp[sum];
+                c+=mp[sum];    
+            //this basically what does is that it includes the combined 
+            //states of zero sum subArrays with the intial zeros
+            //demonstrated as |s1|0|s2|-s2|0
+                            //-----=1
+                            //-------------2
+                            //      =======3
+                            //hence the sum key incremented 3 times in the map.
             mp[sum]++;
         }
         return c;
