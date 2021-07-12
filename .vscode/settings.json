@@ -3,6 +3,10 @@
         "stack": "cpp",
         "deque": "cpp",
         "xstring": "cpp",
-        "xiosbase": "cpp"
+        "xiosbase": "cpp",
+        "iosfwd": "cpp",
+        "list": "cpp",
+        "system_error": "cpp",
+        "vector": "cpp"
     }
 }
