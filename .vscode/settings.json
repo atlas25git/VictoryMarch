@@ -8,6 +8,7 @@
         "list": "cpp",
         "system_error": "cpp",
         "vector": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "utility": "cpp"
     }
 }
