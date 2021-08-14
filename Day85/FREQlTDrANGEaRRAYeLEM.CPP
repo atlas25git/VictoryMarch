@@ -26,7 +26,8 @@ class Solution{
     	for (int i = 0; i < ind ; i++) 
     	    //Adding n to element present at arr[i]%n to keep
     	    //track of count of occurrences of arr[i].
-    		arr[arr[i]%N] = arr[arr[i]%N] + N; 
+    		arr[arr[i]%N]//gives the original index value after n subsequent addn
+                 = arr[arr[i]%N] + N; 
     
         //Calculating the frequency of each element.
     	for (int i = 0; i < N; i++) 
