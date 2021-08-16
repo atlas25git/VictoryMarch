@@ -35,6 +35,7 @@ class Solution
         
         
         //making sets whr order doesn't matter
+        //because we're using a coin just once to fill up the grid
         for(int i=0;i<n;i++)
         {
             int coin = c[i];
