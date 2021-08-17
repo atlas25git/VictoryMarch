@@ -13,7 +13,7 @@ const int mod = 1e9 + 7;
 const int N = 100005, M=22;
 void solve(){
     int i,j,k,n,m,ans=0,cnt=0,sum=0;
-        cout<<5/2<<endl;
+        cout<<max({1,2,3,4,5,6,7,-9})<<endl;
 }
 void init() {
     ios_base:: sync_with_stdio(false);
