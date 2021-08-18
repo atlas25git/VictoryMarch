@@ -78,7 +78,7 @@ void findDuplicate(int arr[])
 
 	// Initialise variables
 	int tortoise = arr[0];
-	int hare = arr[0];
+	int hare = arr[arr[0]];
 
 	// Loop till we find the
 	// duplicate element
