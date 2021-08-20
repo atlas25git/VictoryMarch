@@ -1,9 +1,3 @@
-// { Driver Code Starts
-#include<bits/stdc++.h>
-using namespace std;
-
- // } Driver Code Ends
-
 //lass Solution{
 class Solution{
 	public:
@@ -46,7 +40,12 @@ class Solution{
 		            if (DP[j] == true)
 		            {
 		                if (DP[(j+nums[i]%m)%m] == false)
-		 
+		                    //we're using seperate temp to mark true for 
+		                    //mod values made as we need to include each 
+		                    //element of the set only once.
+		                    //if it were not the case we'd have added on that
+		                    //element multiple times over the current modulo
+		                    
 		                    // We update it in temp and update
 		                    // to DP once loop of j is over
 		                    temp[(j+nums[i]%m) % m] = true;
@@ -70,20 +69,3 @@ class Solution{
 		    return DP[0];
 		}
 };
-
-
-// { Driver Code Starts.
-int main(){
-	int tc;
-	cin >> tc;
-	while(tc--){
-		int n, m;
-		cin >> n >> m;
-		vector<int>nums(n);
-		for(int i = 0; i < n; i++)cin >> nums[i];
-		Solution ob;
-		int ans  = ob.DivisibleByM(nums, m);
-		cout << ans <<"\n";
-	}
-	return 0;
-}  // } Driver Code Ends
