@@ -14,7 +14,7 @@ vector <int> zigZagTraversal(Node* root)
 	
 	//pushing the root in currentlevel stack.
 	currentlevel.push(root);
-	bool left = true;
+	bool right = true;
 	
 	while (!currentlevel.empty())
 	{
@@ -23,7 +23,7 @@ vector <int> zigZagTraversal(Node* root)
 		currentlevel.pop();
 		res.push_back (temp->data);
 		
-			if (left)
+			if (right)
 			{
 				if (temp->left)
 					nextlevel.push(temp->left);
@@ -41,10 +41,51 @@ vector <int> zigZagTraversal(Node* root)
 
 		if (currentlevel.empty()) 
 		{
-			left = !left;
+			right = !right;
 			swap(currentlevel, nextlevel);
 		}
 	}
 	return res;
 }
+};
+
+class Solution{
+    public:
+    //Function to store the zig zag order traversal of tree in a list.
+    vector <int> zigZagTraversal(Node* root)
+    {
+    	vector<int>res;
+    	stack<Node*> cl;
+    	stack<Node*> nl;
+    	cl.push(root);
+    	bool right = true;
+    	while(!cl.empty())
+    	{
+    	    Node* cr = cl.top();
+    	    cl.pop();
+    	    res.push_back(cr->data);
+    	    if(right)
+    	    {
+    	        if(cr->left)
+    	            nl.push(cr->left);
+    	        if(cr->right)
+    	            nl.push(cr->right);
+    	    }
+    	    else
+    	    {
+    	        if(cr->right)
+    	           nl.push(cr->right);
+    	       if(cr->left)
+    	            nl.push(cr->left);
+    	    }
+    	    
+    	    if(cl.empty())
+    	    {
+    	        swap(cl,nl);
+    	        right = !right;
+    	    }
+    	}
+    	
+    	return res;
+    }
 };
