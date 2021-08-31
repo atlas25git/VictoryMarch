@@ -56,11 +56,52 @@ int lPartition(int arr[],int l,int h)
      }
  }
 
-//  Quick Sort
+//  Quick Sort: stable if using Naive partition
+// Tail call elimination happens here.
+// Pivot is chosen randomly to avert adversary analysis.
+// theta(n) worst case storage complexity as on recursion call stack.
 //Divide and conquer algorithm
 //Worst case time O(n^2)
 //Advantages:
-    //a) In Place
+    //a) In Place//though not if counting recusrive call stack
     //b) Cache Friendly
     //c) Average case is O(nlogn)
     //d) Tail Recursive
+
+//Lomuto Used:
+void qSort(int arr[],int l,int h)
+{
+    if(l<h)
+    {
+        int p = partition(arr,l,h);
+        qSort(arr,l,p-1);
+        qSort(arr,p+1,h);
+    }
+
+}
+
+//Hoare's Partition:
+ void qSort(int arr[],int l,int h)
+ {
+     if(l<h)
+     {
+         int p = partition(arr,l,h);
+         qSort(arr,l,p);
+         qSort(arr,p+1,h);
+     }
+ }
+
+//tail call eliminated:
+
+  void qSort(int arr[],int l,int h)
+ {  
+     Begin:
+     if(l<h)
+     {
+         int p = partition(arr,l,h);
+         qSort(arr,l,p);
+         l = p+1;
+         goto Begin;
+     }
+ }
+
