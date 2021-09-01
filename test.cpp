@@ -10,10 +10,71 @@ using namespace std;
 #define P pair<int,int>
 #define pb push_back
 const int mod = 1e9 + 7;
-const int N = 100005, M=22;
+const int N = 2e5 + 1;
+const int MOD = 1e9 + 7;
+int fact[N], inv[N], invfact[N];
+void factInverse() {
+fact[0] = inv[1] = fact[1] = invfact[0] = invfact[1] = 1;
+for (long long i = 2; i < N; i++) {
+fact[i] = (fact[i - 1] * i) % MOD;
+inv[i] = MOD - (inv[MOD % i] * (MOD / i) % MOD);
+invfact[i] = (inv[i] * invfact[i - 1]) % MOD;
+}
+}
+const std::string WHITESPACE = " \n\r\t\f\v";
+std::string ltrim(const std::string &s)
+{
+size_t start = s.find_first_not_of(WHITESPACE);
+return (start == std::string::npos) ? "" : s.substr(start);
+}
+std::string rtrim(const std::string &s)
+{
+size_t end = s.find_last_not_of(WHITESPACE);
+return (end == std::string::npos) ? "" : s.substr(0, end + 1);
+}
+std::string trim(const std::string &s) {
+return rtrim(ltrim(s));
+}
+int add(int a, int b) {
+if ((a += b) >= MOD)
+    a -= MOD;
+else if (a < 0)
+    a += MOD;
+return a;
+}
+int mul(int x, int y) {
+    return (1LL * x * y) % MOD;
+}
+int nCr(int n, int r) {
+    if (r > n)
+        return 0;
+    return mul(mul(fact[n], invfact[r]), invfact[n - r]);
+}
+vector<string> tokenize(string s, const char* del)
+{
+    vector<string> res;
+    auto x = s.c_str();
+    char y[s.size()+1];
+    strcpy(y,x);
+    auto tok = strtok(y,del);
+    while(tok)
+    {
+    res.push_back(string(tok));
+    tok = strtok(0,del);
+    }
+    return res;
+}
 void solve(){
     int i,j,k,n,m,ans=0,cnt=0,sum=0;
-        cout<<max({1,2,3,4,5,6,7,-9})<<endl;
+    cin>>a>>b;
+    while(a<=b)
+    {
+        swap(arr[a++],arr[b--]);
+    }
+    for(int i=0;i<size;i++)
+        cout<<arr[i]<<" ";
+    return 0;
+ 
 }
 void init() {
     ios_base:: sync_with_stdio(false);
@@ -26,9 +87,9 @@ void init() {
 int32_t main(){
     init();
         {
-            int t;
-            //cin>>t;
-            //while(t--)
+            // int t;
+            // cin>>t;
+            // while(t--)
             solve();
         }
     }

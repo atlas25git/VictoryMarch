@@ -14,7 +14,7 @@ void selectSort(arr,n)
     {
         int min_ind = i;
         for(int j=i+1;j<n;j++)
-            if(arr[j]<arr[in_ind])
+            if(arr[j]<arr[min_ind])//finds the index of min element
                 min_ind = j;
         swap(arr[min_ind],arr[i]);
     }
