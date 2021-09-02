@@ -2,7 +2,7 @@
 // 1. O(N^2) worst case.
 // 2. Min memory writes.
 // 3. Inplace and Not stable.
-// 4. Generally used in n questions like find min.
+// 4. Generally used in n questions like find min swaps.
 
 // Algorithm:
 // For an element we count the others smaller than it, and fix it's position in the traversal.
@@ -24,7 +24,11 @@ void cycleSortDistinct(int arr[], int n)
                 if(arr[i]<itm)pos++;
             swap(itm,arr[pos]);
             while(pos!=cs)
-            {
+            {   
+                //re initalizing pos to cs,
+                //leveraging the fact that elements till cs-1 are sorted.
+                //itm holds the element that was at this position
+                
                 pos = cs;
                 for(int cs+1;i<n;i++)
                     if(arr[i]<itm)pos++;
