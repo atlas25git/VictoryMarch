@@ -1,0 +1,49 @@
+class Solution
+{
+    public:
+    //Function to find repeated character whose first appearance is leftmost.
+    int repeatedCharacter (string s) 
+    { 
+        vector<int> fi(256,-1);
+        int res = INT_MAX;
+        for(int i=0;i<s.size();i++)
+        {
+            if(fi[s[i]] == -1)
+                fi[s[i]] = i;
+            else
+                res = min(res,fi[s[i]]);
+        }
+        return res==INT_MAX?-1:res;
+    } 
+};
+
+class Solution
+{
+    public:
+    //Function to find repeated character whose first appearance is leftmost.
+    int repeatedCharacter (string s) 
+    { 
+        //using hash table to store count of each character.
+        int firstIndex[256]; 
+        for (int i = 0; i <256; i++) 
+            firstIndex[i] = -1; 
+      
+        int res = INT_MAX; 
+        
+        //iterating over the string.
+        for (int i = 0; i < s.length(); i++) 
+        { 
+            //if current character is not present in hash table,
+            //we store its position or first appearance in hash table.
+            if (firstIndex[s[i]] == -1) 
+               firstIndex[s[i]] = i;
+               
+            //else we compare the position stored in hash table with 
+            //minimum value stored earlier and store their minimum.
+            else
+               res = min(res, firstIndex[s[i]]); 
+        } 
+        //returning the result.
+        return (res == INT_MAX) ? -1 : res; 
+    } 
+};
