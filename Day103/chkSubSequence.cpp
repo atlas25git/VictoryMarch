@@ -12,4 +12,4 @@ class Solution
         }
         return (j==A.size());
     }
-};
+}; 
