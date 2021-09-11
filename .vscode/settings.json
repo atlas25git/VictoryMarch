@@ -9,6 +9,7 @@
         "system_error": "cpp",
         "vector": "cpp",
         "xutility": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "xlocale": "cpp"
     }
 }
