@@ -10,6 +10,10 @@
         "vector": "cpp",
         "xutility": "cpp",
         "utility": "cpp",
-        "xlocale": "cpp"
+        "xlocale": "cpp",
+        "initializer_list": "cpp",
+        "type_traits": "cpp",
+        "xhash": "cpp",
+        "xtree": "cpp"
     }
 }

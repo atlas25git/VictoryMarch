@@ -64,32 +64,57 @@ vector<string> tokenize(string s, const char* del)
     }
     return res;
 }
+
+void DFS(vector<int> adj[], int v, bool visited[])
+	{
+	    //marking the current vertex as visited.
+        visited[v] = true;
+        vector<int>::iterator i;
+        
+        //traversing over the adjacent vertices.
+        for (i = adj[v].begin(); i != adj[v].end(); ++i)
+        
+            //if any vertex is not visited, we call the function  
+            //recursively for adjacent node.
+            if (!visited[*i]) 
+                DFS(adj, *i, visited);
+    }
+    
+    //Function to find whether graph is connected.
+    bool isConnected(vector<int> adj[], int V, int one, int two) 
+    {
+        //using boolean array to mark visited nodes and currently 
+        //marking all the nodes as false.
+        bool visited[V] = {0};
+        memset(visited, false, sizeof(visited));
+        
+        //finding all reachable vertices from first vertex 
+        //and marking them visited.
+        DFS(adj, one, visited);
+        
+        //if second vertex is not visited, we return false else true.
+        if (visited[two] == false) 
+            return false;
+        return true;
+    }
+
 void solve(){
     int i,j,k,n,m,ans=0,cnt=0,sum=0;
-    string s;
-    getline(cin,s);
-     vector<string> res = tokenize(s," ");
-
-    vector<vector<int>> op;
-    
-    // for(auto x: op)
-    // for(auto y: res)cout<<y<<" ";
-
-    for(auto x: res)
-        {
-            vector<int> tmp;
-            tmp.push_back(stoi(x.substr(0,(int)(s.size() - 1))));
-            tmp.push_back((x[x.size()-1]-'A') + 1);
-            op.push_back(tmp);
-            tmp.clear();
+        cin>>n>>m;
+        vector<vector<int>> graph(n,vector<int>());
+        for(int i=0;i<m;i++)
+        {   
+            cin>>i>>j;
+            graph[i].push_back(j);
         }
-    
-    for(auto x : op)
-    {
-        for(auto y: x)
-            cout<<y<<" ";
+
+        for(auto x: graph)
+            {   cout<<ans++<<" ";
+                for(auto y: x)
+                    cout<<y<<" ";
             cout<<endl;
-    }
+            }
+
 }
 void init() {
     ios_base:: sync_with_stdio(false);
@@ -102,9 +127,9 @@ void init() {
 int32_t main(){
     init();
         {
-            // int t;
-            // cin>>t;
-            // while(t--)
+            int t;
+            cin>>t;
+            while(t--)
             solve();
         }
     }
