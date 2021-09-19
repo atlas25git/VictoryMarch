@@ -66,27 +66,16 @@ vector<string> tokenize(string s, const char* del)
 }
 void solve(){
     int i,j,k,n,m,ans=0,cnt=0,sum=0;
+    cin>>n;
     vector<int>arr(istream_iterator<int>(cin),{});
-    sort(arr.begin(),arr.end());
-    i=0,j=arr.size()-1;
-    int sum1 = arr[0],sum2=arr.back();
-
-    while(i<=j)
+    vector<int> res;
+    for(auto x: arr)
     {
-        if(sum1 == sum2)
-        {
-            ans = sum1;
-            i++,j--;
-        }
-        while(sum1<sum2){
-            sum1+=arr[++i];
-        }
-        while(sum1>sum2)
-        {
-            sum2 += arr[--j];
-        }
+        res.push_back(x);
+        reverse(res.begin(),res.end());
     }
-    cout<<ans<<endl;
+    for(auto y: res)
+        cout<<y<<" ";
  
 }
 void init() {
