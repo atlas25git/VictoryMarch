@@ -64,34 +64,30 @@ vector<string> tokenize(string s, const char* del)
     }
     return res;
 }
+
+int cnvrt(string s)
+{
+    int ans=0;
+    int base = 1;
+
+    for(int i=s.size()-1;i>=0;i--)
+    {
+        int prop = (s[i]-'0')*base;
+        ans += prop;
+        base*=10; 
+    }
+
+    return ans;
+}
+
 void solve(){
     int i,j,k,n,m,ans=0,cnt=0,sum=0;
-    // cin>>n;
-    // vector<int>arr(istream_iterator<int>(cin),{});
-    // vector<int> res;
-    // for(auto x: arr)
-    // {
-    //     res.push_back(x);
-    //     reverse(res.begin(),res.end());
-    // }
-    // for(auto y: res)
-    //     cout<<y<<" ";
-    // cin>>n;
-    // string s;
-    // getline(cin,s);
+        string s;
+        cin>>s;
 
-    // stringstream ss(s);
-    
-    cin.ignore();
-    for(int c;cin>>c;)
-        {
-            cout<<c<<" ";
-            if(cin.peek()==',')
-                cin.ignore();
-        }
-    // cin>>s;
-    // cout<<s<<endl;
- 
+        ans = cnvrt(s);
+
+        cout<<ans;
 }
 void init() {
     ios_base:: sync_with_stdio(false);
