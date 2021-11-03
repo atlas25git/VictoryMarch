@@ -1,0 +1,7 @@
+Prims MST: 28
+Vertices in MST set: 
+0 1 2 3 
+Dijkstra: 
+0 1 2 3
+0 5 8 20 
+Execution Time: 0.0010seconds
