@@ -82,16 +82,32 @@ void solve(){
 
     // stringstream ss(s);
     
-    cin.ignore();
-    for(int c;cin>>c;)
-        {
-            cout<<c<<" ";
-            if(cin.peek()==',')
-                cin.ignore();
-        }
+    // cin.ignore();
+    // for(int c;cin>>c;)
+    //     {
+    //         cout<<c<<" ";
+    //         if(cin.peek()==',')
+    //             cin.ignore();
+    //     }
     // cin>>s;
     // cout<<s<<endl;
- 
+    string s,c;
+    getline(cin,s,' ');
+    stringstream ss(s);
+    c = s;
+    while(getline(ss,s,'#'))
+    {
+        cout<<s<<endl;
+    }
+
+    auto tok = strtok((char*)c.c_str(),"#");
+
+    while(tok)
+    {
+        cout<<tok<<"\n";
+        tok = strtok(0,"#");
+    }
+
 }
 void init() {
     ios_base:: sync_with_stdio(false);
@@ -104,9 +120,9 @@ void init() {
 int32_t main(){
     init();
         {
-            int t;
-            cin>>t;
-            while(t--)
+            // int t;
+            // cin>>t;
+            // while(t--)
             solve();
         }
     }
