@@ -5,12 +5,14 @@
         //Lomuto
         //Hoare (fastest)
 
+// TC: O(n^2) Worst case, O(nlogn) avg case
 
 //Naive:
 // O(n) space and time using an auxilary array
 // Requires 4 traversals of the array.
 
 //Lomuto Partition: Pivot Last element
+//Not Stable.
 //Places one element at it's actual position acc to sorting
 //O(n) time with just one traversal.
 //Constant space.

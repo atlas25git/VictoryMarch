@@ -1,5 +1,5 @@
 //1. Linear time algorithm when the data is in a limited range.
-// Theta(n+b) && Stable as it uses stable counting sort.
+// Theta(d*(n+b)) && Stable as it uses stable counting sort.
 // Where b is the base, if we increase base then time complexity will reduce
 // but required space to store the elements on bases would also inc, thus a trade off
 // is observed here.

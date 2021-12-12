@@ -32,7 +32,8 @@ void heapSort(int arr[], int n)
 	buildheap(arr,n); 
 
 	for (int i=n-1; i>0; i--) 
-	{ 
+	{ 	// picking from first(the largest) and swapping it with the last.
+		// then calling heapify on the reduced array.
 		swap(arr[0], arr[i]);
 		heapify(arr, i, 0); 
 	} 

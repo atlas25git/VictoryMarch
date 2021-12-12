@@ -21,16 +21,20 @@ void cycleSortDistinct(int arr[], int n)
             int itm = arr[cs];
             int pos = cs;
             for(int i=cs+1;i<n;i++)
+                //0 based indexing hence starts from 0.
+                //hence no of items greater than current cycle start
+                //will eventually be it's position on o 0 based index.
                 if(arr[i]<itm)pos++;
             swap(itm,arr[pos]);
+            //arr[pos] and arr[cs] both hold the same value, item holds the swapped value that is to be fixed.
             while(pos!=cs)
             {   
                 //re initalizing pos to cs,
                 //leveraging the fact that elements till cs-1 are sorted.
                 //itm holds the element that was at this position
-                
+                //arr[pos] contains the fixed element.
                 pos = cs;
-                for(int cs+1;i<n;i++)
+                for(int i=cs+1;i<n;i++)
                     if(arr[i]<itm)pos++;
                     swap(itm,arr[pos]);
             }

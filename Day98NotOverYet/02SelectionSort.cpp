@@ -11,7 +11,8 @@
 void selectSort(arr,n)
 {
     for(int i=0;i<n-1;i++)
-    {
+    {   
+        //min_ind is i as we're starting from the lowest possible ordering.
         int min_ind = i;
         for(int j=i+1;j<n;j++)
             if(arr[j]<arr[min_ind])//finds the index of min element

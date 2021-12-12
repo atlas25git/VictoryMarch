@@ -24,6 +24,12 @@ void countSort(int arr[], int n, int k)
         count[i]=count[i-1]+count[i];
     
     int output[n];
+    //starting from n-1 to maintain stability. As the one occurring latter
+    //should be as such, object clause.
+    //As we can discern that the number of elements will be equal to the frequency as mentioned, hence
+    //every time we see one to fix it while traversing we choose the last such possible index for that position,
+    //and hence reduce the freq by 1.
+    //In this way the relative order is maintained.
     for(int i=n-1;i>=0;i--){
         output[count[arr[i]]-1]=arr[i];
         count[arr[i]]--;

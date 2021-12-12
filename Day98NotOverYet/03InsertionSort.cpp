@@ -17,6 +17,7 @@ void insertion_sort(int arr[],int n)
                 arr[j+1]=arr[j];
                 j--;//marks for the element smaller than key's index
             }
+            //current j will be as such that it doesn't hold the inequality arr[j]>key
             arr[j+1]=key;//places the key just in front of it
         }
 }
