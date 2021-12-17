@@ -1,0 +1,37 @@
+class Solution 
+{
+    public:
+    //Function to detect cycle in an undirected graph.
+	
+	bool util(int u, int v,vector<bool>& vis, vector<int>adj[])
+	{
+	    vis[u]=true;
+	    
+	    for(auto x: adj[u])
+	        {
+	            //since the given graph is undirected hence for an edge u-v
+	            //adj list of u and v would both contain the other vertex.
+	            if(x == v)
+                    continue;
+	            if(vis[x])
+                    return true;
+	            else if(util(x,u,vis,adj))
+                    return true;
+	        }
+	   return false;
+	}
+	
+	bool isCycle(int V, vector<int>adj[])
+	{
+	    //we're gonna do a dfs traversal here, returning true
+	    //if a vertex contains an edge to some already visited vertex, 
+	   // but it's not parent
+	    vector<bool>vis(V,0);
+	    
+	    for(int i=0;i<V;i++)
+	        if(!vis[i])
+	           if(util(i,-1,vis,adj)) return true;
+	           
+	   return false;
+	}
+};

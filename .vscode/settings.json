@@ -24,6 +24,10 @@
         "ostream": "cpp",
         "streambuf": "cpp",
         "tuple": "cpp",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "array": "cpp",
+        "any": "cpp",
+        "string_view": "cpp",
+        "regex": "cpp"
     }
 }
