@@ -3,6 +3,7 @@
 *****************************************/
 #include<bits/stdc++.h>
 using namespace std;
+using namespace chrono;
 #define int long long int
 #define ld long double
 #define F first
@@ -66,19 +67,7 @@ vector<string> tokenize(string s, const char* del)
 }
 void solve(){
     int i,j,k,n,m,ans=0,cnt=0,sum=0;
-        string s;
-        getline(cin,s);
-        auto x = strtok((char*)s.c_str()," ");
-        stringstream ss;
-
-        while(x)
-        {   
-            if((string)x=="N")
-            ss<<"null"<<",";
-            else ss<<x<<",";
-            x = strtok(0," ");
-        }
-        cout<<ss.str();
+        
 }
 void init() {
     ios_base:: sync_with_stdio(false);
@@ -91,10 +80,16 @@ void init() {
 int32_t main(){
     init();
         {
+            #ifndef ONLINE_JUDGE
+                auto begin = high_resolution_clock::now();
+            #endif
             int t;
             cin>>t;
             while(t--)
             solve();
+            #ifndef ONLINE_JUDGE
+                auto end = high_resolution_clock::now();
+                cout << fixed << setprecision(4) << "Execution Time: " << duration_cast<duration<double>>(end - begin).count() << "seconds" << '\n';
+            #endif
         }
     }
-
