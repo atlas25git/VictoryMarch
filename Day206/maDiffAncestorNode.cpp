@@ -1,31 +1,30 @@
-int fill(Node* root,int& diff)
-{   //Through fn calls we discover the min element in 
-    //the given tree and if it turns out that none of the children
-    //are smaller then we simply denounce them all and proceed with root's
-    //data
-    if(!root)
-        //returned max so that during the min filter, exisitng node gets selected
-        //and in case of both being null, only the root node will get selected
-        return INT_MAX;
-    //redundant as returning Max would fix the job
-    //if(!root->right && !root->left)return root->data;
+ */
+//When absolute diff is asked.
+// int diff(Node* root,int mx,int mn)
+// {
+//     if(!root)return mx-mn;
+//     mn = min(mn,root->data);
+//     mx = max(mx,root->data);
+//     return max(diff(root->left,mx,mn),diff(root->right,mx,mn));
+// }
+
+// Since the question requires us to compute the asked diff in a predefined order,
+// and hence our algo will compute min element in a given subtree and store the diff
+// of them from the root a that level throughout maintaing the max df as the ans.
+int df;
+int fill(Node* root)
+{
+    if(!root)return INT_MAX;
+    int lmin = fill(root->left);
+    int rmin = fill(root->right);
     
-    int l = fill(root->left,diff);
-    int r = fill(root->right,diff);
-    
-    diff = max(diff,root->data - min(l,r));
-    //zero in the case that diff might become negative
-    //since if min(l,r) > root->data, the diff would become negative
-    //hence ignoring this case
-    return min(root->data,min(l,r));
+    df = max(df,root->data - min(lmin,rmin));
+    return min({root->data,lmin,rmin});
 }
 
-
-//Function to return the maximum difference between any node and its ancestor.
 int maxDiff(Node* root)
 {
-  int diff = INT_MIN;
-  if(!root)return 0;
-  fill(root,diff);
-  return diff;
+    df = INT_MIN;
+    fill(root);
+    return df;
 }
