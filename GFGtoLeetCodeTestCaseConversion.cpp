@@ -70,7 +70,7 @@ void solve(){
         getline(cin,s);
         auto x = strtok((char*)s.c_str()," ");
         stringstream ss;
-
+        ss<<'[';
         while(x)
         {   
             if((string)x=="N")
@@ -78,6 +78,7 @@ void solve(){
             else ss<<x<<",";
             x = strtok(0," ");
         }
+        ss<<']';
         cout<<ss.str();
 }
 void init() {
@@ -91,9 +92,9 @@ void init() {
 int32_t main(){
     init();
         {
-            int t;
-            cin>>t;
-            while(t--)
+            // int t;
+            // cin>>t;
+            // while(t--)
             solve();
         }
     }
