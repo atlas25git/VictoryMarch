@@ -1,0 +1,322 @@
+Min-Max Paths:
+-------------
+
+1) Given a m x n grid filled with non-negative numbers, 
+    find a path from top left to bottom right, which minimizes 
+    the sum of all numbers along its path.
+
+        class Solution {
+        public:
+            unordered_map<string,int> memo;
+
+            int minPathSum(vector<vector<int>>& grid) {
+                  return rec(grid,grid.size()-1,grid[0].size()-1);
+            }
+
+            int rec(vector<vector<int>>& grid,int i, int j)
+            {
+                if(memo.count(to_string(i) + " " + to_string(j)))return memo[to_string(i)+" "+to_string(j)];
+
+                if(!i && !j)return grid[i][j];
+                if(!i)return grid[i][j] + rec(grid,i,j-1);
+                if(!j)return grid[i][j] + rec(grid,i-1,j);
+
+                return memo[to_string(i)+" "+to_string(j)] = grid[i][j] + min(rec(grid,i-1,j),rec(grid,i,j-1));
+            }
+
+            int bUP(vector<vector<int>>& grid)
+            {
+                int m = grid.size(),n=grid[0].size();
+                vector<vector<int>> dp(m,vector<int>(n,INT_MAX));
+
+                for(int i=0;i<m;i++)dp[i][0] = grid[i][0]+(i?dp[i-1][0]:0);
+                for(int i=0;i<n;i++)dp[0][i] = grid[0][i]+(i?dp[0][i-1]:0);
+
+                for(int i=1;i<m;i++)
+                    for(int j=1;j<n;j++)
+                        dp[i][j] =  grid[i][j] + min(dp[i-1][j],dp[i][j-1]);
+
+                return dp[m-1][n-1]; 
+            }
+
+        };
+
+2). Given a triangle array, return the minimum path sum from top to bottom.
+    For each step, you may move to an adjacent number of the row below. More formally, 
+    if you are on index i on the current row, you may move to either index i or index 
+    i + 1 on the next row.
+
+        class Solution {
+        public:
+
+            vector<vector<int>> cache;
+
+            int minimumTotal(vector<vector<int>>& triangle) {
+                if(!triangle.size())return 0;
+
+                //cache
+                cache.resize(triangle.size(),vector<int>(triangle.size(),INT_MAX));
+                // return BUP(triangle);
+
+                return recCache(0,0,triangle);
+            }
+
+            int BUP(vector<vector<int>>& tri)
+            {
+                for(int i=0;i<tri.size();i++)
+                    cache[tri.size()-1][i] = tri[tri.size()-1][i];
+
+                for(int i = tri.size()-2;i>-1;i--)
+                    for(int j=0;j<=i;j++)
+                        cache[i][j] = tri[i][j] + min(cache[i+1][j+1],cache[i+1][j]);
+
+                return cache[0][0];
+            }
+
+            int rec(int i,int j,vector<vector<int>>& tri)
+            {
+                if(i+1 >= tri.size()) return tri[i][j];
+
+                return tri[i][j] + min(rec(i+1,j,tri),rec(i+1,j+1,tri));
+            }
+
+            int recCache(int i,int j, vector<vector<int>>& tri)
+            {
+                //since for each row two options would have been called,
+                //hence at the last row, we'll have a pair i,j and hence we can 
+                //just return the asked col
+                if(i==tri.size()-1)return tri[i][j];
+
+                if(cache[i][j]!=INT_MAX)return cache[i][j];
+
+                cache[i][j] = tri[i][j] + min(recCache(i+1,j,tri),recCache(i+1,j+1,tri));
+                return cache[i][j];
+
+            }
+        };
+
+3. Dungeon Game:
+    //Building solution from the bottom most cell to the above, hence the base case
+    //lies in the last cell if the contained value is +ve hence it's adjacent cells will 
+    //need 1 energy point on this part.
+
+
+        class Solution {
+        public:
+            map<pair<int,int>,int> memo;
+            int calculateMinimumHP(vector<vector<int>>& dg) {
+                //recursive approach:
+                //since we need the answer at 0,0 hence calling the fn 
+                //for 0,0 as initial states.
+                
+                // return rec(dg,0,0);
+                
+                vector<vector<int>>dp (dg.size()+1,vector<int>(dg[0].size()+1,INT_MAX));
+                
+                //dp[i][j] will have the min energy required to reach this cell
+                int r = dg.size();
+                int c = dg[0].size();
+                
+                dp[r-1][c] = 1;
+                dp[r][c-1] = 1;
+                
+                for(int i=r-1;i>-1;i--)
+                    for(int j=c-1;j>-1;j--)
+                    {     
+                            int nd = min(dp[i+1][j],dp[i][j+1]) - dg[i][j];
+                            dp[i][j] = nd>0?nd:1;
+                    }
+                
+                return dp[0][0];
+            }
+            
+            int rec(vector<vector<int>>& dg,int i,int j)
+            {   
+                //for the last cell
+                if(i==dg.size() || j==dg[0].size())
+                        return 1e9+7;
+                
+                if(i==dg.size()-1 && j == dg[0].size()-1)
+                        //as the penultimate cells need to have min energy to be reached,
+                        //Hence considering that we reach those penultimate cells in most optimized
+                        //way that is 0 hence will need just 1 more energy point to skip to the
+                        //last result.
+                        return dg[i][j]>0?1:-1*(dg[i][j])+1;
+                
+                if(memo.count({i,j}))
+                        return memo[{i,j}];
+                
+                int rw = rec(dg,i+1,j);
+                int dw = rec(dg,i,j+1);
+                
+                
+                //mhrc contains the min energy to reach destination from current cell, and
+                //hence we need to add up if the cell i,j itself requires energy or else, substract
+                //from the minimums if we are getting some positive nrgy.
+                int mhrc = min(rw,dw) - dg[i][j];
+                
+                return memo[{i,j}] = mhrc>0?mhrc:1;
+            }
+        };
+
+4. Maximal Square:
+
+        int maximalSquare1(vector<vector<char>>& matrix) {
+                if (matrix.empty()) {
+                    return 0;
+                }
+                
+                int m = matrix.size(), n = matrix[0].size(), sz = 0;
+                
+                vector<vector<int>> dp(m, vector<int>(n, 0));
+                
+                for (int i = 0; i < m; i++) {
+                    for (int j = 0; j < n; j++) {
+                        
+                        if (!i || !j || matrix[i][j] == '0') {
+                            dp[i][j] = matrix[i][j] - '0';
+                        } else {
+                            //considering minimum coz we are assuming our dp[i][j]
+                            // /as having the side len of which square existes corresponding to that cell
+                            //now out of the three the one containing the cell in question will have
+                            //the min as the commmon intersection side length
+                            dp[i][j] = min(dp[i - 1][j - 1], min(dp[i - 1][j], dp[i][j - 1])) + 1;
+                        }
+                        sz = max(dp[i][j], sz);
+                    }
+                }
+                return sz * sz;
+            }
+
+5. Perfect Squares:
+
+        class Solution {
+        public:
+            int numSquares(int n) {
+                //basically the idea here is that our dp[i] will store
+                //the min no of squares needed to sum up to it.
+                //and hence for every no. i we'll search for all such combinations
+                //till its sqrt
+                
+                vector<int> dp(n+1,INT_MAX);
+                dp[0] = 0;
+                for(int i=1;i<=n;i++)
+                    for(int j=1;j<=sqrt(i);j++)
+                        dp[i] = min(dp[i],dp[i-j*j]+1);
+                
+                return dp[n];
+            }
+            
+            unordered_map<int,int> memo;
+            
+            int numSquares1(int n,int ans = INT_MAX) {
+                if(!n)return 0;
+                if(n<0)return INT_MAX;
+                
+                if(memo.count(n))return memo[n];
+                
+                for(int i=1;i<=sqrt(n);i++)
+                    ans = min(ans,numSquares(n-i*i)+1);
+                
+                return memo[n] = ans;
+            }
+        };
+
+6. Coin Change
+
+        class Solution {
+        public:
+            unordered_map<int,int> dp;
+            int coinChange(vector<int>& coins, int amount) {
+                // dp.resize(amount+1,INT_MAX);
+                // vector<int>dp(amount+1,INT_MAX);
+                // sort(coins.begin(),coins.end());
+                if(!amount)return 0;
+                int ans = recCC(coins,amount);
+                return ans==INT_MAX?-1:ans;
+        //         dp[0] = 0;
+                
+                //Bottom up solution based on recursive approach
+
+        //          for(int i=1;i<=amount;i++)
+        //             for(auto c: coins)
+        //             {
+        //                 if(c<=i)
+        //                     if(dp[i-c]!=INT_MAX)
+        //                         dp[i] = min(dp[i],dp[i-c]+1);
+        //             }
+                
+                
+        //         return dp[amount]==INT_MAX?-1:dp[amount];
+                
+                vector<vector<int>> dp(coins.size()+1,vector<int>(amount+1,0));
+                
+                for(int i=1;i<=amount;i++)
+                    if(i>=coins.front())
+                        {if(dp[1][i-coins.front()] == 0 && i == coins.front())
+                            dp[1][i] = dp[1][i-coins.front()] + 1; 
+                        else dp[1][i] = (dp[1][i-coins.front()]>0?dp[1][i-coins.front()]:-1) + 1;}
+
+                            
+                for(int i=2;i<=coins.size();i++)
+                    for(int j=0;j<=amount;j++)
+                    {   
+                        if(!j)dp[i][j] = 0;
+                        else if(coins[i-1]<=j)
+                        {
+                        dp[i][j] = min(dp[i-1][j],dp[i][j-coins[i-1]]+1);
+                        }
+                        else dp[i][j] = dp[i-1][j];
+                    }
+                
+                for(auto x: dp)
+                {
+                    for(auto y: x)
+                        cout<<y<<" ";
+                    cout<<"\n";
+                }
+                return dp[coins.size()][amount]?dp[coins.size()][amount]:-1;
+            }
+            
+            int recCC(vector<int>& coins,int amt)
+            {
+                if(amt<0)return INT_MAX;
+                if(!amt)return 0;
+                if(dp.count(amt))
+                    return dp[amt];
+                int res=INT_MAX;
+        
+                for(auto x: coins)
+                    res = min((long)res,(long)recCC(coins,amt-x)+1);
+        
+                return dp[amt] = res;
+            }
+            
+            
+            //the so tried include exclude approach just doesn't work here
+            //because in any ghiven case we're exploring the depth of it's reduction state space graph
+            //and since it contains nodes where sometimes jsut the coin exclusion is presest,
+            //and hence results in adding redundant coutns of coins
+            
+        //     int coinChange(vector<int>& coins, int amount) {
+        //         int ways = cnt(coins.size(),coins,amount);
+        //         return ways==INT_MAX?-1:ways;
+        //     }
+            
+            
+        //     int cnt(int i,vector<int>& coins,int amount)
+        //     {
+        //         if(i <= 0 || amount<0)return 1e9;
+        //         if(!amount)return 0;
+        //         int inc=1e9,exc=1e9;
+        //         int res = 1e9;
+                
+        //         if(coins[i-1]<=amount)
+        //             inc = cnt(i,coins,amount-coins[i-1]);
+        //         exc = cnt(i-1,coins,amount);
+                
+        //         res = min({res,inc,exc});
+        //         if(res >= 1e9)return 1e9;
+        //         else return min(inc,exc)+1;
+        //     }
+        };
