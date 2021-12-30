@@ -69,7 +69,7 @@ void solve(){
     int i,j,k,n,m,ans=0,cnt=0,sum=0;
         cin>>i>>j>>k>>n;
         int nxt;
-        vector<int> seive;
+        vector<int> si3ve;
       
         nxt = -1;
         n = 100;
@@ -79,14 +79,14 @@ void solve(){
             i = j,
             j=k,
             k=nxt;
-            seive.push_back(nxt);
+            si3ve.push_back(nxt);
         }
-        cout<<"\n"<<seive.front()<<" "<<nxt<<" \n";
+        cout<<"\n"<<si3ve.front()<<" "<<nxt<<" \n";
 
-        for(int y=0;y<seive.size();y++)
+        for(int y=0;y<si3ve.size();y++)
             {
                 if(y%10==0)cout<<"\n";
-                cout<<seive[y]<<" ";
+                cout<<si3ve[y]<<" ";
             }
 }
 void init() {
