@@ -29,6 +29,7 @@
         "any": "cpp",
         "string_view": "cpp",
         "regex": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "string": "cpp"
     }
 }
