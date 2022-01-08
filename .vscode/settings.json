@@ -30,6 +30,7 @@
         "string_view": "cpp",
         "regex": "cpp",
         "*.tcc": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "iostream": "cpp"
     }
 }
